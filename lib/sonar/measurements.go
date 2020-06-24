@@ -2,6 +2,7 @@ package sonar
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -24,7 +25,8 @@ type MeasurementResponse struct {
 
 //ProjectMeasurements retrieves the measurements we pass through about the projects.
 func (c *Client) ProjectMeasurements(key string) (*MeasurementResponse, error) {
-	url := c.sonarConnectionString + "/measures/component?metricKeys=ncloc,coverage,vulnerabilities,bugs,violations&component=" + key
+
+	url := fmt.Sprintf("%s/measures/component?metricKeys=ncloc,coverage,vulnerabilities,bugs,violations&component=%s", c.sonarConnectionString, key)
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {

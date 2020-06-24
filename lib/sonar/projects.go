@@ -2,6 +2,7 @@ package sonar
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -28,7 +29,7 @@ type ProjectResponse struct {
 //ListProjects lists the current projects in the organization.
 func (c *Client) ListProjects(opt *ListOptions) (*ProjectResponse, error) {
 
-	url := c.sonarConnectionString + "/projects/search?organization=" + c.organization + "&p=" + strconv.Itoa(opt.Page)
+	url := fmt.Sprintf("%s/projects/search?organization=%s&p=%s", c.sonarConnectionString, c.organization, strconv.Itoa(opt.Page))
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {

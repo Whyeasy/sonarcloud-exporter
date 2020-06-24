@@ -35,29 +35,25 @@ type MeasurementsStats struct {
 
 //ExporterClient contains SonarCloud information for connecting
 type ExporterClient struct {
-	Token        string
-	Organization string
+	sqc *sonar.Client
 }
 
 //New returns a new Client connection to SonarCloud
 func New(c internal.Config) *ExporterClient {
 	return &ExporterClient{
-		Token:        c.Token,
-		Organization: c.Organization,
+		sqc: sonar.NewClient(c.Token, c.Organization),
 	}
 }
 
 //GetStats retrieves data from API to create metrics from.
 func (c *ExporterClient) GetStats() (*Stats, error) {
 
-	sqc := sonar.NewClient(c.Token, c.Organization)
-
-	projects, err := getProjects(sqc)
+	projects, err := getProjects(c.sqc)
 	if err != nil {
 		return nil, err
 	}
 
-	measurements, err := getMeasurements(sqc, projects)
+	measurements, err := getMeasurements(c.sqc, projects)
 	if err != nil {
 		return nil, err
 	}
