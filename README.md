@@ -6,7 +6,7 @@
 
 A Prometheus Exporter for SonarCloud
 
-Currently this exporter retrieves the following data:
+Currently this exporter retrieves the following metrics:
 
 - Project info within a given organization.
 - Lines of Code within a project.
@@ -25,6 +25,10 @@ Provide a SonarCloud Access Token to access the API; `--scToken <string>` or as 
 
 ### Optional
 
-Change listening port of the exporter; `listenAddress <string>` or as env variable `LISTEN_ADDRESS`. Default = `8080`
+Change listening port of the exporter; `--listenAddress <string>` or as env variable `LISTEN_ADDRESS`. Default = `8080`
 
-Change listening path of the exporter; `listenPath <string>` or as env variable `LISTEN_PATH`. Default = `/metrics`
+Change listening path of the exporter; `--listenPath <string>` or as env variable `LISTEN_PATH`. Default = `/metrics`
+
+## Helm
+
+You can find a helm chart to install the exporter [here](https://github.com/Whyeasy/helm-charts/tree/master/charts/sonarcloud-exporter).
