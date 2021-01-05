@@ -17,11 +17,11 @@ archives:
   - name_template: "{{ .ProjectName }}_{{ .Os }}"
     format: binary
 snapshot:
-  name_template: "{{ .Tag }}-next"
+  name_template: "{{ .FullCommit }}"
 dockers:
   - image_templates:
       - "whyeasy/{{ .ProjectName }}:latest"
-      - "whyeasy/{{ .ProjectName }}:{{ .Tag }}"
+      - "whyeasy/{{ .ProjectName }}:{{ .Version }}"
 checksum:
   name_template: "checksums.txt"
 changelog:
